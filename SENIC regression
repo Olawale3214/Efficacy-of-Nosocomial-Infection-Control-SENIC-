@@ -21,5 +21,4 @@ PROC REG DATA=one;
 	MODEL nurses =  stay infect culture xray beds patients / SELECTION=BACKWARD;
 	MODEL nurses =  stay infect culture xray beds patients / SELECTION=STEPWISE;
 	RUN;
-
 QUIT;
