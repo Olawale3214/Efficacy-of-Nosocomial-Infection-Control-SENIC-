@@ -1,0 +1,25 @@
+FILENAME hw10dat URL "http://www.stat.wmich.edu/naranjo/stat6620/senic_data.txt";
+DATA one;
+INFILE hw10dat;
+INPUT hospital stay age infect culture xray beds school region patients nurses service;
+
+PROC SGSCATTER DATA=one;
+  TITLE "Scatterplot Matrix for nurses vs stay infect culture";
+  MATRIX nurses stay infect culture;
+  RUN;
+PROC SGSCATTER DATA=one;
+  TITLE "Scatterplot Matrix for nurses vs stay infect culture";
+  MATRIX nurses stay infect culture;
+  RUN;
+
+PROC REG DATA=one;
+	MODEL nurses =  stay infect culture xray beds patients / SELECTION=RSQUARE SSE ADJRSQ CP AIC PRESS;
+	RUN;
+
+PROC REG DATA=one;
+	MODEL nurses =  stay infect culture xray beds patients/ SELECTION=FORWARD;
+	MODEL nurses =  stay infect culture xray beds patients / SELECTION=BACKWARD;
+	MODEL nurses =  stay infect culture xray beds patients / SELECTION=STEPWISE;
+	RUN;
+
+QUIT;
